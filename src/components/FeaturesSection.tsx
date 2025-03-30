@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Calendar, Map, Users, DollarSign, ArrowUp, MapPin } from "lucide-react";
 import GlobeComponent from './GlobeComponent';
+import FallbackSphere from './FallbackSphere';
 
 const features = [
   {
@@ -60,21 +61,23 @@ const FeaturesSection = () => {
         <div className="relative h-[600px] md:h-[800px] mx-auto">
           {/* Globe Canvas */}
           <div className="absolute inset-0 z-0 opacity-80">
-            <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-              <ambientLight intensity={0.5} />
-              <pointLight position={[10, 10, 10]} intensity={1} />
-              <Suspense fallback={null}>
-                <GlobeComponent />
-              </Suspense>
-              <OrbitControls 
-                enableZoom={false}
-                enablePan={false}
-                autoRotate
-                autoRotateSpeed={0.5}
-                minPolarAngle={Math.PI / 2 - 0.5}
-                maxPolarAngle={Math.PI / 2 + 0.5}
-              />
-            </Canvas>
+            <Suspense fallback={<FallbackSphere />}>
+              <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+                <ambientLight intensity={0.5} />
+                <pointLight position={[10, 10, 10]} intensity={1} />
+                <Suspense fallback={null}>
+                  <GlobeComponent />
+                </Suspense>
+                <OrbitControls 
+                  enableZoom={false}
+                  enablePan={false}
+                  autoRotate
+                  autoRotateSpeed={0.5}
+                  minPolarAngle={Math.PI / 2 - 0.5}
+                  maxPolarAngle={Math.PI / 2 + 0.5}
+                />
+              </Canvas>
+            </Suspense>
           </div>
           
           {/* Feature Cards positioned around the globe */}

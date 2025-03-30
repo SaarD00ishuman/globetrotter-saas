@@ -14,15 +14,16 @@ const GlobeComponent = () => {
   });
 
   return (
-    <Sphere ref={globeRef} args={[1, 36, 36]} position={[0, 0, 0]}>
+    <mesh ref={globeRef} position={[0, 0, 0]}>
+      <sphereGeometry args={[1, 36, 36]} />
       <meshStandardMaterial 
         color="#0EA5E9" 
         metalness={0.1}
         roughness={0.7}
-        opacity={0.9}
         transparent
+        opacity={0.9}
       />
-    </Sphere>
+    </mesh>
   );
 };
 
