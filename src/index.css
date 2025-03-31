@@ -49,13 +49,12 @@
 @layer utilities {
   .hero-gradient {
     background: linear-gradient(135deg, 
-      rgba(14, 165, 233, 0.12) 0%, 
-      rgba(56, 189, 248, 0.08) 25%, 
+      rgba(14, 165, 233, 0.15) 0%, 
+      rgba(56, 189, 248, 0.1) 25%, 
       rgba(16, 185, 129, 0.05) 50%, 
-      rgba(251, 191, 36, 0.04) 75%, 
-      rgba(249, 115, 22, 0.08) 100%
+      rgba(251, 191, 36, 0.05) 75%, 
+      rgba(249, 115, 22, 0.1) 100%
     );
-    position: relative;
   }
   
   .text-gradient {
@@ -72,26 +71,5 @@
   .pricing-card-highlight {
     background: linear-gradient(145deg, #f0f9ff, #e0f2fe);
     border: 2px solid #0EA5E9;
-  }
-  
-  /* 3D card effect */
-  .perspective-[1000px] {
-    perspective: 1000px;
-  }
-  
-  .transform-gpu {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    will-change: transform;
-  }
-  
-  /* Typewriter cursor effect */
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-  
-  .animate-blink {
-    animation: blink 0.8s step-end infinite;
   }
 }
