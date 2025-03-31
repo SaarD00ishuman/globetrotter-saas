@@ -1,8 +1,43 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, Map, Users } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const HeroSection = () => {
+  const phrases = [
+    "your AI companion",
+    "smart trip planning",
+    "personalized travel"
+  ];
+  
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  useEffect(() => {
+    const phrase = phrases[currentPhraseIndex];
+    
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        setCurrentText(phrase.substring(0, currentText.length + 1));
+        
+        if (currentText.length === phrase.length) {
+          // Wait before starting to delete
+          setTimeout(() => setIsDeleting(true), 1500);
+        }
+      } else {
+        setCurrentText(phrase.substring(0, currentText.length - 1));
+        
+        if (currentText.length === 0) {
+          setIsDeleting(false);
+          setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+        }
+      }
+    }, isDeleting ? 50 : 100);
+    
+    return () => clearTimeout(timer);
+  }, [currentText, currentPhraseIndex, isDeleting, phrases]);
+  
   return (
     <section className="pt-40 pb-24 md:pt-48 md:pb-32 hero-gradient overflow-hidden">
       <div className="container px-6 md:px-8 max-w-7xl mx-auto">
@@ -17,7 +52,11 @@ const HeroSection = () => {
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight md:leading-tight">
               <span className="block">Travel smarter with</span>
-              <span className="text-gradient font-extrabold">your AI companion</span>
+              <span className="text-gradient font-extrabold relative min-h-[1.2em] inline-block">
+                <span className="absolute">{currentText}</span>
+                <span className="opacity-0">your AI companion</span>
+                <span className="animate-blink ml-1 absolute">|</span>
+              </span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-[640px] mx-auto lg:mx-0 leading-relaxed">
