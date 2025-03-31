@@ -1,10 +1,6 @@
-
-import React, { Suspense, useRef, useEffect } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import React, { useRef, useEffect } from 'react';
 import { Calendar, Map, Users, DollarSign, ArrowUp, MapPin } from "lucide-react";
 import GlobeComponent from './GlobeComponent';
-import FallbackSphere from './FallbackSphere';
 
 const features = [
   {
@@ -170,25 +166,11 @@ const FeaturesSection = () => {
             xmlns="http://www.w3.org/2000/svg"
           ></svg>
           
-          {/* Globe Canvas */}
-          <div className="absolute inset-0 z-0 opacity-80">
-            <Suspense fallback={<FallbackSphere />}>
-              <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} intensity={1} />
-                <Suspense fallback={null}>
-                  <GlobeComponent />
-                </Suspense>
-                <OrbitControls 
-                  enableZoom={false}
-                  enablePan={false}
-                  autoRotate
-                  autoRotateSpeed={0.5}
-                  minPolarAngle={Math.PI / 2 - 0.5}
-                  maxPolarAngle={Math.PI / 2 + 0.5}
-                />
-              </Canvas>
-            </Suspense>
+          {/* Globe Canvas - now a direct component instead of Three.js Canvas */}
+          <div className="absolute inset-0 z-0 opacity-80 flex items-center justify-center">
+            <div className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px]">
+              <GlobeComponent />
+            </div>
           </div>
           
           {/* Feature Cards positioned around the globe */}

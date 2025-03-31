@@ -1,12 +1,52 @@
 
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUp, Calendar, Map, Users } from "lucide-react";
 
+// Text options for the typewriter effect
+const headerTexts = [
+  "Travel smarter with your AI companion",
+  "Explore better with AI intelligence",
+  "Discover the world, guided by AI",
+  "Adventure awaits with your AI guide"
+];
+
 const HeroSection = () => {
+  const [displayText, setDisplayText] = useState("");
+  const [textIndex, setTextIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  useEffect(() => {
+    const text = headerTexts[textIndex];
+    
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        setDisplayText(text.substring(0, displayText.length + 1));
+        
+        if (displayText === text) {
+          setIsDeleting(true);
+          setTypingSpeed(2000); // Pause before deleting
+        }
+      } else {
+        setDisplayText(text.substring(0, displayText.length - 1));
+        
+        if (displayText === '') {
+          setIsDeleting(false);
+          setTextIndex((textIndex + 1) % headerTexts.length);
+          setTypingSpeed(150); // Reset typing speed
+        }
+      }
+    }, typingSpeed);
+    
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, textIndex, typingSpeed]);
+
   return (
     <section className="pt-32 pb-16 md:pt-40 md:pb-24 hero-gradient">
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col lg:flex-row items-center">
+        <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="flex-1 space-y-8 text-center lg:text-left mb-12 lg:mb-0">
             <div className="inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-medium bg-white/50 backdrop-blur-sm">
               <span className="flex items-center gap-1">
@@ -14,8 +54,9 @@ const HeroSection = () => {
               </span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight">
-              Travel smarter with your AI companion
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight min-h-[3em] lg:min-h-[2em]">
+              <span className="typewriter-text">{displayText}</span>
+              <span className="animate-blink">|</span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-[700px] mx-auto lg:mx-0">
@@ -23,10 +64,10 @@ const HeroSection = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button className="bg-travel-ocean hover:bg-travel-ocean/90 text-white h-12 px-8">
+              <Button size="lg" className="bg-travel-ocean hover:bg-travel-ocean/90 text-white px-8 py-6 text-lg">
                 Start Planning Free
               </Button>
-              <Button variant="outline" className="h-12 px-8">
+              <Button variant="outline" size="lg" className="px-8 py-6 text-lg border-2">
                 See How It Works
               </Button>
             </div>
