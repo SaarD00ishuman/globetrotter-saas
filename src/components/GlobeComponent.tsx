@@ -45,13 +45,13 @@ const GlobeComponent: React.FC<GlobeProps> = ({ className }) => {
     }
   };
 
-  const updateMovement = (clientX: number) => {
-    if (pointerInteracting.current !== null) {
-      const delta = clientX - pointerInteracting.current;
-      pointerInteractionMovement.current = delta;
-      setR(delta / 200);
-    }
-  };
+  // const updateMovement = (clientX: number) => {
+  //   if (pointerInteracting.current !== null) {
+  //     const delta = clientX - pointerInteracting.current;
+  //     pointerInteractionMovement.current = delta;
+  //     setR(delta / 200);
+  //   }
+  // };
 
   const onRender = useCallback(
     (state: any) => {
@@ -71,7 +71,7 @@ const GlobeComponent: React.FC<GlobeProps> = ({ className }) => {
 
   useEffect(() => {
     if (!isClient) return;
-    
+
     window.addEventListener("resize", onResize);
     onResize();
 
@@ -112,17 +112,17 @@ const GlobeComponent: React.FC<GlobeProps> = ({ className }) => {
     <div className={`relative w-full aspect-square max-w-[600px] mx-auto ${className || ""}`}>
       <canvas
         ref={canvasRef}
-        style={{ 
-          width: "100%", 
-          height: "100%", 
+        style={{
+          width: "100%",
+          height: "100%",
           opacity: 0,
           transition: "opacity 0.5s ease"
         }}
         onPointerDown={(e) => updatePointerInteraction(e.clientX - pointerInteractionMovement.current)}
         onPointerUp={() => updatePointerInteraction(null)}
         onPointerOut={() => updatePointerInteraction(null)}
-        onMouseMove={(e) => updateMovement(e.clientX)}
-        onTouchMove={(e) => e.touches[0] && updateMovement(e.touches[0].clientX)}
+      // onMouseMove={(e) => updateMovement(e.clientX)}
+      // onTouchMove={(e) => e.touches[0] && updateMovement(e.touches[0].clientX)}
       />
     </div>
   );

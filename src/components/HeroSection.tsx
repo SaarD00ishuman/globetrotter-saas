@@ -20,26 +20,26 @@ const HeroSection = () => {
 
   useEffect(() => {
     const text = headerTexts[textIndex];
-    
+
     const timer = setTimeout(() => {
       if (!isDeleting) {
         setDisplayText(text.substring(0, displayText.length + 1));
-        
+
         if (displayText === text) {
           setIsDeleting(true);
-          setTypingSpeed(2000); // Pause before deleting
+          setTypingSpeed(50); // Pause before deleting
         }
       } else {
         setDisplayText(text.substring(0, displayText.length - 1));
-        
+
         if (displayText === '') {
           setIsDeleting(false);
           setTextIndex((textIndex + 1) % headerTexts.length);
-          setTypingSpeed(150); // Reset typing speed
+          setTypingSpeed(200); // Reset typing speed
         }
       }
     }, typingSpeed);
-    
+
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, textIndex, typingSpeed]);
 
@@ -53,16 +53,16 @@ const HeroSection = () => {
                 <span className="text-travel-ocean">✨</span> AI-powered travel planning
               </span>
             </div>
-            
+
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight min-h-[3em] lg:min-h-[2em]">
               <span className="typewriter-text">{displayText}</span>
               <span className="animate-blink">|</span>
             </h1>
-            
+
             <p className="text-lg md:text-xl text-muted-foreground max-w-[700px] mx-auto lg:mx-0">
               Plan, organize, and enjoy your trips with intelligent recommendations, real-time updates, and personalized itineraries.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button size="lg" className="bg-travel-ocean hover:bg-travel-ocean/90 text-white px-8 py-6 text-lg">
                 Start Planning Free
@@ -71,7 +71,7 @@ const HeroSection = () => {
                 See How It Works
               </Button>
             </div>
-            
+
             <div className="pt-6 flex flex-wrap gap-6 justify-center lg:justify-start">
               <div className="flex items-center gap-2">
                 <Calendar className="h-5 w-5 text-travel-ocean" />
@@ -87,12 +87,12 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="flex-1 relative">
             <div className="relative bg-white rounded-xl shadow-2xl overflow-hidden border animate-float">
-              <img 
-                src="https://images.unsplash.com/photo-1469474968028-56623f02e42e" 
-                alt="Travel destination" 
+              <img
+                src="https://images.unsplash.com/photo-1469474968028-56623f02e42e"
+                alt="Travel destination"
                 className="w-full aspect-[4/3] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
@@ -102,7 +102,7 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="absolute -top-6 -right-6 bg-white rounded-lg shadow-lg p-4 animate-pulse-soft border">
               <div className="flex items-center gap-3">
                 <div className="bg-travel-ocean/20 p-2 rounded-full">
@@ -114,7 +114,7 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="absolute -bottom-8 -left-8 bg-white rounded-lg shadow-lg p-4 animate-pulse-soft border">
               <div className="flex items-center gap-3">
                 <div className="bg-travel-forest/20 p-2 rounded-full">

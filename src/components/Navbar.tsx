@@ -13,7 +13,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { name: "Home", url: "#", icon: Home },
+  { name: "Home", url: "#hero", icon: Home },
   { name: "Features", url: "#features", icon: Map },
   { name: "Testimonials", url: "#testimonials", icon: Globe },
   { name: "Pricing", url: "#pricing", icon: CreditCard },
@@ -21,20 +21,19 @@ const navItems: NavItem[] = [
 
 const Navbar = () => {
   const [activeTab, setActiveTab] = useState("Home");
-  const isMobile = useIsMobile();
 
   // Set active tab based on scroll position
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll("section");
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + 120;
 
       sections.forEach((section) => {
         if (!section.id) return;
-        
+
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
-        
+
         if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
           const sectionId = section.getAttribute("id");
           if (sectionId === "hero") {
@@ -59,7 +58,7 @@ const Navbar = () => {
           <MapPin className="h-6 w-6 text-travel-ocean" />
           <span className="font-bold text-xl">TravelAI</span>
         </div>
-        
+
         <div className="hidden md:flex items-center gap-3 bg-background/5 border border-travel-ocean/20 backdrop-blur-lg py-1 px-1 rounded-full shadow-md">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -110,11 +109,11 @@ const Navbar = () => {
             );
           })}
         </div>
-        
+
         {/* Mobile navigation */}
         <div className="md:hidden flex items-center">
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             className="p-2"
             onClick={() => {
               const mobileNav = document.getElementById("mobile-nav");
@@ -124,26 +123,26 @@ const Navbar = () => {
             }}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 12H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M3 6H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M3 12H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M3 6H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Button>
         </div>
-        
+
         <div className="hidden md:flex items-center gap-4">
           <Button variant="ghost" size="sm">Login</Button>
           <Button size="sm" className="bg-travel-ocean hover:bg-travel-ocean/90">Sign Up Free</Button>
         </div>
       </div>
-      
+
       {/* Mobile navigation drawer */}
       <div id="mobile-nav" className="hidden md:hidden absolute top-full left-0 right-0 bg-white/90 backdrop-blur-sm border-b border-travel-ocean/10 shadow-lg py-4 px-6">
         <div className="flex flex-col gap-4">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.name;
-            
+
             return (
               <a
                 key={item.name}
@@ -158,7 +157,7 @@ const Navbar = () => {
                       behavior: "smooth"
                     });
                   }
-                  
+
                   // Hide mobile nav after clicking
                   const mobileNav = document.getElementById("mobile-nav");
                   if (mobileNav) {
@@ -175,7 +174,7 @@ const Navbar = () => {
               </a>
             );
           })}
-          
+
           <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-travel-ocean/10">
             <Button variant="ghost" size="sm" className="justify-start">
               <User size={18} className="mr-2" />

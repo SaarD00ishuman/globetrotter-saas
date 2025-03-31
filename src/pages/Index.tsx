@@ -19,7 +19,7 @@ const Index = () => {
         <section id="features">
           <FeaturesSection />
         </section>
-        <section id="how-ai-works">
+        <section id="features">
           <AiTimelineGuide />
         </section>
         <section id="testimonials">

@@ -10,7 +10,7 @@ interface TimelineEntry {
 export const AiTimelineGuide = () => {
   const timelineData: TimelineEntry[] = [
     {
-      title: "Understand",
+      title: "Planning Your Journey",
       content: (
         <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-6 mb-10">
           <p className="text-neutral-800 dark:text-neutral-200 mb-4">
@@ -18,9 +18,9 @@ export const AiTimelineGuide = () => {
           </p>
           <div className="flex items-center justify-center">
             <div className="rounded-lg overflow-hidden w-full max-w-md">
-              <img 
-                src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e" 
-                alt="AI analyzing travel preferences" 
+              <img
+                src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e"
+                alt="AI analyzing travel preferences"
                 className="w-full h-64 object-cover"
               />
             </div>
@@ -29,26 +29,7 @@ export const AiTimelineGuide = () => {
       ),
     },
     {
-      title: "Plan",
-      content: (
-        <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-6 mb-10">
-          <p className="text-neutral-800 dark:text-neutral-200 mb-4">
-            Based on your unique profile, our AI crafts intelligent itineraries that balance your must-see destinations with hidden gems you wouldn't find on your own.
-          </p>
-          <div className="flex items-center justify-center">
-            <div className="rounded-lg overflow-hidden w-full max-w-md">
-              <img 
-                src="https://images.unsplash.com/photo-1527489377706-5bf97e608852" 
-                alt="AI planning travel itinerary" 
-                className="w-full h-64 object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: "Optimize",
+      title: "Enhance",
       content: (
         <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-6 mb-10">
           <p className="text-neutral-800 dark:text-neutral-200 mb-4">
@@ -56,9 +37,9 @@ export const AiTimelineGuide = () => {
           </p>
           <div className="flex items-center justify-center">
             <div className="rounded-lg overflow-hidden w-full max-w-md">
-              <img 
-                src="https://images.unsplash.com/photo-1484301548518-d0e0a5db0fc8" 
-                alt="AI optimizing travel plans" 
+              <img
+                src="https://images.unsplash.com/photo-1484301548518-d0e0a5db0fc8"
+                alt="AI optimizing travel plans"
                 className="w-full h-64 object-cover"
               />
             </div>
@@ -67,7 +48,7 @@ export const AiTimelineGuide = () => {
       ),
     },
     {
-      title: "Assist",
+      title: "Carefree Travel",
       content: (
         <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-6 mb-10">
           <p className="text-neutral-800 dark:text-neutral-200 mb-4">
@@ -75,35 +56,16 @@ export const AiTimelineGuide = () => {
           </p>
           <div className="flex items-center justify-center">
             <div className="rounded-lg overflow-hidden w-full max-w-md">
-              <img 
-                src="https://images.unsplash.com/photo-1531538606174-0f90ff5dce83" 
-                alt="AI providing real-time travel assistance" 
+              <img
+                src="https://images.unsplash.com/photo-1531538606174-0f90ff5dce83"
+                alt="AI providing real-time travel assistance"
                 className="w-full h-64 object-cover"
               />
             </div>
           </div>
         </div>
       ),
-    },
-    {
-      title: "Learn",
-      content: (
-        <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-6 mb-10">
-          <p className="text-neutral-800 dark:text-neutral-200 mb-4">
-            After each trip, the AI learns from your feedback and experiences to make your next adventure even more tailored to your evolving preferences and travel style.
-          </p>
-          <div className="flex items-center justify-center">
-            <div className="rounded-lg overflow-hidden w-full max-w-md">
-              <img 
-                src="https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06" 
-                alt="AI learning from travel experiences" 
-                className="w-full h-64 object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      ),
-    },
+    }
   ];
 
   const ref = useRef<HTMLDivElement>(null);
@@ -131,15 +93,15 @@ export const AiTimelineGuide = () => {
       ref={containerRef}
     >
       <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
-        <h2 className="text-3xl md:text-5xl mb-6 text-center font-bold text-gradient">
-          How Our AI Travel Assistant Works
+        <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">
+          Our AI Travel Companion
         </h2>
-        <p className="text-neutral-700 dark:text-neutral-300 text-center text-lg md:text-xl max-w-2xl mx-auto mb-16">
-          Your personal AI travel companion that makes every journey seamless, personalized, and unforgettable.
+        <p className="text-muted-foreground max-w-[800px] text-center mx-auto">
+          Experience the future of travel planning with our AI assistant that learns, adapts, and enhances your journey every step of the way.
         </p>
       </div>
 
-      <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
+      <div ref={ref} className="relative  max-w-7xl mx-auto pb-20">
         {timelineData.map((item, index) => (
           <div
             key={index}
@@ -147,9 +109,9 @@ export const AiTimelineGuide = () => {
           >
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
               <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
-                <div className="h-4 w-4 rounded-full bg-blue-500 dark:bg-blue-400 border border-blue-600 dark:border-blue-300 p-2" />
+                <div className="h-4 w-4 rounded-full bg-[#0ea6e9] dark:bg-blue-400 border border-blue-600 dark:border-blue-300 p-2" />
               </div>
-              <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-blue-600 dark:text-blue-400">
+              <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-sky-500 dark:text-blue-400">
                 {item.title}
               </h3>
             </div>
