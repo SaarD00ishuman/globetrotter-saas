@@ -1,29 +1,26 @@
 
-import React, { Suspense, useRef, useEffect } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import React, { useRef, useEffect } from 'react';
 import { Calendar, Map, Users, DollarSign, ArrowUp, MapPin } from "lucide-react";
-import GlobeComponent from './GlobeComponent';
-import FallbackSphere from './FallbackSphere';
+import Map2DComponent from './2DMapComponent';
 
 const features = [
   {
     icon: <Calendar className="h-6 w-6 text-travel-ocean" />,
     title: "Smart Itinerary Builder",
     description: "Our AI analyzes thousands of options to create personalized day-by-day plans based on your preferences, budget, and travel style.",
-    position: { top: '15%', left: '20%' }
+    position: { top: '15%', left: '15%' }
   },
   {
     icon: <Map className="h-6 w-6 text-travel-forest" />,
     title: "Local Insights",
     description: "Discover hidden gems and authentic experiences with recommendations from locals and seasoned travelers.",
-    position: { top: '20%', right: '20%' }
+    position: { top: '15%', right: '15%' }
   },
   {
     icon: <Users className="h-6 w-6 text-travel-sunset" />,
     title: "Collaborative Planning",
     description: "Invite friends and family to contribute to your travel plans with real-time collaboration and voting features.",
-    position: { bottom: '20%', left: '15%' }
+    position: { bottom: '15%', left: '15%' }
   },
   {
     icon: <DollarSign className="h-6 w-6 text-travel-sand" />,
@@ -35,13 +32,13 @@ const features = [
     icon: <ArrowUp className="h-6 w-6 text-travel-ocean" />,
     title: "Real-time Alerts",
     description: "Stay informed with price drops, weather changes, and travel advisories that might affect your journey.",
-    position: { top: '50%', left: '10%' }
+    position: { top: '50%', left: '5%', transform: 'translateY(-50%)' }
   },
   {
     icon: <MapPin className="h-6 w-6 text-travel-sunset" />,
     title: "On-trip Companion",
     description: "Access your plans offline and get real-time guidance, translations, and emergency assistance during your travels.",
-    position: { top: '50%', right: '10%' }
+    position: { top: '50%', right: '5%', transform: 'translateY(-50%)' }
   }
 ];
 
@@ -62,7 +59,7 @@ const FeaturesSection = () => {
         svg.removeChild(svg.firstChild);
       }
       
-      // Get the center point of the container (where the globe is)
+      // Get the center point of the container (where the map is)
       const centerX = container.offsetWidth / 2;
       const centerY = container.offsetHeight / 2;
       
@@ -83,7 +80,6 @@ const FeaturesSection = () => {
         // Calculate control points for a curved line
         const dx = cardCenterX - centerX;
         const dy = cardCenterY - centerY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
         
         // Adjust control points to create a nice curve
         const controlX = centerX + dx * 0.5 - dy * 0.2;
@@ -151,13 +147,13 @@ const FeaturesSection = () => {
   }, []);
 
   return (
-    <section id="features" className="py-24 bg-white relative overflow-hidden">
-      <div className="container px-4 md:px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+    <section id="features" className="py-32 bg-white relative overflow-hidden">
+      <div className="container px-4 md:px-8 lg:px-12 relative z-10 max-w-6xl mx-auto">
+        <div className="text-center mb-20">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
             Your complete travel companion
           </h2>
-          <p className="text-muted-foreground max-w-[800px] mx-auto">
+          <p className="text-muted-foreground max-w-[800px] mx-auto text-lg">
             From initial inspiration to on-the-ground guidance, our AI-powered platform streamlines every aspect of your travel experience.
           </p>
         </div>
@@ -170,39 +166,23 @@ const FeaturesSection = () => {
             xmlns="http://www.w3.org/2000/svg"
           ></svg>
           
-          {/* Globe Canvas */}
-          <div className="absolute inset-0 z-0 opacity-80">
-            <Suspense fallback={<FallbackSphere />}>
-              <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} intensity={1} />
-                <Suspense fallback={null}>
-                  <GlobeComponent />
-                </Suspense>
-                <OrbitControls 
-                  enableZoom={false}
-                  enablePan={false}
-                  autoRotate
-                  autoRotateSpeed={0.5}
-                  minPolarAngle={Math.PI / 2 - 0.5}
-                  maxPolarAngle={Math.PI / 2 + 0.5}
-                />
-              </Canvas>
-            </Suspense>
+          {/* 2D Map Component */}
+          <div className="absolute inset-[15%] z-0 rounded-xl shadow-xl overflow-hidden border border-blue-100">
+            <Map2DComponent />
           </div>
           
-          {/* Feature Cards positioned around the globe */}
+          {/* Feature Cards positioned around the map */}
           {features.map((feature, index) => (
             <div 
               key={index} 
               ref={el => cardRefs.current[index] = el}
-              className="absolute w-64 p-4 rounded-xl border bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 z-10"
+              className="absolute w-64 p-5 rounded-xl border bg-white/95 shadow-lg hover:shadow-xl transition-all duration-300 z-10 hover:scale-105"
               style={feature.position as React.CSSProperties}
             >
-              <div className="p-3 rounded-full w-fit bg-muted mb-3">
+              <div className="p-3 rounded-full w-fit bg-muted mb-4">
                 {feature.icon}
               </div>
-              <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
+              <h3 className="text-lg font-bold mb-3">{feature.title}</h3>
               <p className="text-muted-foreground text-sm">{feature.description}</p>
             </div>
           ))}
