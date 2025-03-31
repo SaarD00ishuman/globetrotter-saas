@@ -6,6 +6,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import PricingSection from "@/components/PricingSection";
 import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
+import AiTimelineGuide from "@/components/AiTimelineGuide";
 
 const Index = () => {
   return (
@@ -17,6 +18,9 @@ const Index = () => {
         </section>
         <section id="features">
           <FeaturesSection />
+        </section>
+        <section id="how-ai-works">
+          <AiTimelineGuide />
         </section>
         <section id="testimonials">
           <TestimonialsSection />
